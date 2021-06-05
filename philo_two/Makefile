@@ -6,13 +6,13 @@
 #    By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/02 16:57:38 by jjoo              #+#    #+#              #
-#    Updated: 2021/06/04 00:38:57 by jjoo             ###   ########.fr        #
+#    Updated: 2021/06/05 22:11:02 by jjoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo_two
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -pthread
 SRCS	=	$(wildcard srcs/*.c)
 INCS	=	-I includes
 OBJS	=	$(SRCS:.c=.o)
