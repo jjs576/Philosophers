@@ -6,14 +6,14 @@
 #    By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/02 16:57:38 by jjoo              #+#    #+#              #
-#    Updated: 2021/06/05 22:11:02 by jjoo             ###   ########.fr        #
+#    Updated: 2021/06/05 22:37:19 by jjoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo_two
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -pthread
-SRCS	=	$(wildcard srcs/*.c)
+SRCS	=	srcs/init.c srcs/main.c srcs/routine.c srcs/utils.c srcs/run.c
 INCS	=	-I includes
 OBJS	=	$(SRCS:.c=.o)
 
