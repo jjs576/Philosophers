@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 21:34:39 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/05 22:33:20 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/05 22:39:49 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static void	parse_arg(t_info *info, int argc, char *argv[])
 
 static void	init_sema(t_info *info)
 {
+	sem_unlink("forks");
 	info->forks = sem_open("forks", O_CREAT, 0644, info->num_of_philo / 2);
+	if (info->forks == SEM_FAILED)
+		exit(-1);
 }
 
 static void	init_philos(t_info *info)
