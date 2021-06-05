@@ -1,53 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor.c                                          :+:      :+:    :+:   */
+/*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 22:54:01 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/04 00:38:43 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/05 22:07:20 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	check_state(t_philo *p)
+int		get_philos_state(t_info *info)
 {
-	return (p->state);
-}
+	int	state;
+	int	i;
 
-static void	all_is_over(t_info *info)
+	i = -1;
+	state = 0;
+	while (++i < info->num_of_philo)
+	{
+		state |= info->philos[i].state;
+	}
+	return (state);
+}
+void	set_philos_over(t_info *info)
 {
-	t_philo	*p;
 	int		i;
+	t_philo	*temp;
 
 	i = -1;
 	while (++i < info->num_of_philo)
 	{
-		p = &info->philos[i];
-		p->state = STATE_OVER;
+		temp = &info->philos[i];
+		temp->state = STATE_OVER;
 	}
 }
-
-void		*monitor(void *arg)
+void	run(t_info *info)
 {
-	t_info	*info;
-	int		i;
-	int		state;
+	int	state;
+	int	i;
 
-	info = arg;
-	while (!(state & STATE_DEAD) && !(state == STATE_OVER))
+	while (1)
 	{
-		state = 0;
-		pthread_mutex_lock(&info->checker);
-		i = -1;
-		while (!state && ++i < info->num_of_philo)
-			state |= check_state(&info->philos[i]);
-		pthread_mutex_unlock(&info->checker);
+		state =	get_philos_state(info);
+		if (state & STATE_DEAD)
+			set_philos_over(info);
+		if (state == STATE_OVER || state == STATE_DEAD)
+			break ;
 	}
-	pthread_mutex_lock(&info->checker);
-	all_is_over(info);
-	pthread_mutex_unlock(&info->checker);
-	return (0);
+	i = -1;
+	while (++i < info->num_of_philo)
+		pthread_join(info->tid[i], NULL);
 }

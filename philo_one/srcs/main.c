@@ -6,20 +6,11 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 21:33:41 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/04 00:20:39 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/05 22:09:30 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static int	wait_for_monitor(t_info *info)
-{
-	int	ret;
-
-	ret = 0;
-	pthread_join(info->tid_monitor, NULL);
-	return (ret);
-}
 
 static void	free_all(t_info *info)
 {
@@ -30,13 +21,11 @@ static void	free_all(t_info *info)
 int			main(int argc, char *argv[])
 {
 	t_info	info;
-	int		ret;
 
-	ret = 0;
 	if (argc != 5 && argc != 6)
 		return (printf("error: bad arguments\n") & 0);
 	init(&info, argc, argv);
-	ret = wait_for_monitor(&info);
+	run(&info);
 	free_all(&info);
-	return (ret);
+	return (0);
 }

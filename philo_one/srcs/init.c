@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 21:34:39 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/04 00:39:15 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/05 22:08:25 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	parse_arg(t_info *info, int argc, char *argv[])
 		info->num_of_must_eat = -1;
 }
 
-static void	init_forks(t_info *info)
+static void	init_mutex(t_info *info)
 {
 	int	i;
 
@@ -47,7 +47,7 @@ static void	init_philos(t_info *info)
 		temp->index = i + 1;
 		temp->state = STATE_RUN;
 		temp->start_time = info->start_time;
-		temp->last_eat = 0;
+		temp->last_eat = info->start_time;
 		temp->time_to_die = info->time_to_die;
 		temp->time_to_eat = info->time_to_eat;
 		temp->time_to_sleep = info->time_to_sleep;
@@ -55,7 +55,6 @@ static void	init_philos(t_info *info)
 		temp->eat_count = 0;
 		temp->fork_left = &info->forks[i % info->num_of_philo];
 		temp->fork_right = &info->forks[(i + 1) % info->num_of_philo];
-		temp->checker = &info->checker;
 	}
 }
 
@@ -64,16 +63,13 @@ void		init(t_info *info, int argc, char *argv[])
 	int	i;
 
 	parse_arg(info, argc, argv);
-	info->start_time = get_time(0);
-	pthread_mutex_init(&info->checker, NULL);
-	init_forks(info);
+	info->start_time = get_time();
+	init_mutex(info);
 	init_philos(info);
-	pthread_create(&info->tid_monitor, NULL, monitor, (void*)info);
 	i = 0;
 	while (i < info->num_of_philo)
 	{
 		pthread_create(&info->tid[i], NULL, routine, (void*)&info->philos[i]);
-		pthread_detach(info->tid[i]);
 		i += 2;
 	}
 	i = 1;
@@ -81,7 +77,6 @@ void		init(t_info *info, int argc, char *argv[])
 	while (i < info->num_of_philo)
 	{
 		pthread_create(&info->tid[i], NULL, routine, (void*)&info->philos[i]);
-		pthread_detach(info->tid[i]);
 		i += 2;
 	}
 }
