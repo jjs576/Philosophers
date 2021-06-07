@@ -6,17 +6,68 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 21:33:41 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/05 22:33:47 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 18:20:10 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void		print_message(t_philo *p, char *state)
+{
+	sem_wait(p->checker);
+	if (!(*p->dying_message))
+		printf("%lums %d%s", get_time() - p->start_time, p->index, state);
+	if (*p->is_dead)
+		*p->dying_message = 1;
+	sem_post(p->checker);
+}
+
 static void	free_all(t_info *info)
 {
 	free(info->philos);
+	free(info->tid);
 	sem_close(info->forks);
+	sem_close(info->checker);
 }
+
+static void	get_who_die(t_info *info)
+{
+	int	i;
+
+	i = -1;
+	while (++i < info->num_of_philo)
+	{
+		if (info->is_dead && info->first_die == -1)
+		{
+			info->first_die = i;
+			break ;
+		}
+	}
+}
+
+static void	run(t_info *info)
+{
+	int	i;
+	int	run;
+
+	run = 1;
+	while (run)
+	{
+		sem_wait(info->checker);
+		if (info->amount == info->num_of_philo)
+			run = 0;
+		get_who_die(info);
+		sem_post(info->checker);
+		if (info->first_die != -1)
+			run = 0;
+	}
+	if (info->first_die != -1)
+		print_message(&info->philos[info->first_die], MESSAGE_DIE);
+	i = -1;
+	while (++i < info->num_of_philo)
+		pthread_join(info->tid[i], NULL);
+}
+
 
 int			main(int argc, char *argv[])
 {

@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:00:00 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/07 13:21:12 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 18:26:26 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@
 # define TRUE			1
 # define FALSE			0
 
-# define STATE_RUN		0x00000001
-# define STATE_EAT		0x00000002
-# define STATE_SLEEP	0x00000004
-# define STATE_THINK	0x00000008
-# define STATE_DEAD		0x00000010
-# define STATE_OVER		0x00000020
+# define STATE_EAT		0x00000001
+# define STATE_SLEEP	0x00000002
+# define STATE_THINK	0x00000004
+# define STATE_DEAD		0x00000008
+# define STATE_OVER		0x00000010
 
 # define MESSAGE_FORK	" has taken a fork\n"
 # define MESSAGE_EAT	" is eating\n"

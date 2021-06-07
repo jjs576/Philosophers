@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 21:34:39 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/07 13:23:47 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 18:36:37 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	init_philos(t_info *info)
 	{
 		temp = &info->philos[i];
 		temp->index = i + 1;
-		temp->state = STATE_RUN;
+		temp->state = STATE_EAT;
 		temp->start_time = info->start_time;
 		temp->last_eat = info->start_time;
 		temp->time_to_die = info->time_to_die;

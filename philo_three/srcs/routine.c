@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 22:05:20 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/06 16:40:15 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 18:36:30 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ static void	philo_think(t_philo *p)
 void		routine(t_philo *p)
 {
 	p->state |= STATE_EAT;
-	while (p->state & STATE_RUN)
+	while (!(p->state & STATE_OVER))
 	{
 		if (p->eat_count == p->num_of_must_eat)
 			p->state = STATE_OVER;
 		if (get_time() - p->last_eat >= p->time_to_die)
-			p->state = STATE_DEAD;
+			p->state = STATE_DEAD | STATE_OVER;
 		if (p->state & STATE_EAT)
 			philo_eat(p);
 		else if (p->state & STATE_SLEEP)

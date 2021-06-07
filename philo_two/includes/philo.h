@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:00:00 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/07 13:20:56 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 18:20:28 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,14 @@
 # include <semaphore.h>
 # include <sys/time.h>
 
-# define THREAD_MAX		200
-
 # define TRUE			1
 # define FALSE			0
 
-# define STATE_RUN		0x00000001
-# define STATE_EAT		0x00000002
-# define STATE_SLEEP	0x00000004
-# define STATE_THINK	0x00000008
-# define STATE_DEAD		0x00000010
-# define STATE_OVER		0x00000020
+# define STATE_EAT		0x00000001
+# define STATE_SLEEP	0x00000002
+# define STATE_THINK	0x00000004
+# define STATE_DEAD		0x00000008
+# define STATE_OVER		0x00000010
 
 # define MESSAGE_FORK	" has taken a fork\n"
 # define MESSAGE_EAT	" is eating\n"
@@ -42,6 +39,8 @@
 typedef struct	s_philo
 {
 	size_t			start_time;
+	int				*is_dead;
+	int				*is_end;
 	int				state;
 	size_t			last_eat;
 	int				index;
@@ -50,11 +49,17 @@ typedef struct	s_philo
 	size_t			time_to_eat;
 	size_t			time_to_sleep;
 	int				num_of_must_eat;
+	int				*dying_message;
 	sem_t			*forks;
+	sem_t			*checker;
 }				t_philo;
 
 typedef struct	s_info
 {
+	int				dying_message;
+	int				is_dead;
+	int				amount;
+	int				first_die;
 	size_t			start_time;
 	int				num_of_philo;
 	size_t			time_to_die;
@@ -62,11 +67,13 @@ typedef struct	s_info
 	size_t			time_to_sleep;
 	int				num_of_must_eat;
 	t_philo			*philos;
-	pthread_t		tid[THREAD_MAX];
+	pthread_t		*tid;
 	sem_t			*forks;
+	sem_t			*checker;
 }				t_info;
 
-void			run(t_info *info);
+void			print_message(t_philo *philo, char *state);
+
 void			*routine(void *arg);
 
 void			init(t_info *info, int argc, char **argv);
