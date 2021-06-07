@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:00:00 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/07 18:26:26 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 22:02:21 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,19 @@ typedef struct	s_philo
 	size_t			time_to_sleep;
 	int				num_of_must_eat;
 	pid_t			pid;
-	int				status;
 	sem_t			*forks;
+	int				*dying_message;
+	int				*is_dead;
 }				t_philo;
 
 typedef struct	s_info
 {
 	size_t			start_time;
+	int				first_die;
+	int				amount;
 	int				num_of_philo;
+	int				dying_message;
+	int				is_dead;
 	size_t			time_to_die;
 	size_t			time_to_eat;
 	size_t			time_to_sleep;
@@ -67,7 +72,8 @@ typedef struct	s_info
 	sem_t			*forks;
 }				t_info;
 
-void			run(t_info *info);
+void			print_message(t_philo *philo, char *state);
+
 void			routine(t_philo *p);
 
 void			init(t_info *info, int argc, char **argv);

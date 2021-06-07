@@ -6,16 +6,11 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 22:05:20 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/07 18:36:30 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 21:53:45 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static void	print_message(t_philo *philo, char *state)
-{
-	printf("%lums %d%s", get_time() - philo->start_time, philo->index, state);
-}
 
 static void	philo_eat(t_philo *p)
 {
@@ -53,7 +48,6 @@ static void	philo_think(t_philo *p)
 
 void		routine(t_philo *p)
 {
-	p->state |= STATE_EAT;
 	while (!(p->state & STATE_OVER))
 	{
 		if (p->eat_count == p->num_of_must_eat)
@@ -67,7 +61,5 @@ void		routine(t_philo *p)
 		else if (p->state & STATE_THINK)
 			philo_think(p);
 	}
-	if (p->state == STATE_DEAD)
-		print_message(p, MESSAGE_DIE);
 	exit(p->state);
 }

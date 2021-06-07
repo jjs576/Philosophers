@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 21:34:39 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/07 18:36:37 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 21:49:27 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static void	init_philos(t_info *info)
 		temp->num_of_must_eat = info->num_of_must_eat;
 		temp->eat_count = 0;
 		temp->forks = info->forks;
+		temp->dying_message = &info->dying_message;
+		temp->is_dead = &info->is_dead;
 	}
 }
 
@@ -64,6 +66,10 @@ void		init(t_info *info, int argc, char *argv[])
 	info->start_time = get_time();
 	init_sema(info);
 	init_philos(info);
+	info->amount = 0;
+	info->first_die = -1;
+	info->dying_message = 0;
+	info->is_dead = 0;
 	i = -1;
 	while (++i < info->num_of_philo)
 	{
