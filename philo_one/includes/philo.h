@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 17:00:00 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/05 22:15:46 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 13:21:04 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			init(t_info *info, int argc, char **argv);
 int				ft_max(int a, int b);
 int				ft_min(int a, int b);
 int				ft_atoi(char *s);
-size_t			get_time();
+size_t			get_time(void);
 void			ft_sleep(size_t time);
 
 #endif

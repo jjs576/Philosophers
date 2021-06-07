@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 22:54:01 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/06 17:00:23 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 13:23:41 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	run(t_info *info)
 
 	while (1)
 	{
-		state =	get_philos_state(info);
+		state = get_philos_state(info);
 		if (state & STATE_DEAD)
 			set_philos_kill(info);
 		if (state == STATE_OVER || state == STATE_DEAD)

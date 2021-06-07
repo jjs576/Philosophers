@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 21:34:39 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/05 22:39:49 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 13:22:37 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	init_sema(t_info *info)
 static void	init_philos(t_info *info)
 {
 	t_philo	*temp;
-	int	i;
+	int		i;
 
 	i = -1;
 	info->philos = malloc(sizeof(t_philo) * info->num_of_philo);

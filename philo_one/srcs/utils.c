@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 12:57:42 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/05 21:54:01 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 13:19:11 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				ft_atoi(char *s)
 	return (ret);
 }
 
-size_t			get_time()
+size_t			get_time(void)
 {
 	struct timeval	time;
 

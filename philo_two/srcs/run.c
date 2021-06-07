@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 22:54:01 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/05 22:33:37 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 13:21:56 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		get_philos_state(t_info *info)
 	}
 	return (state);
 }
+
 void	set_philos_over(t_info *info)
 {
 	int		i;
@@ -37,6 +38,7 @@ void	set_philos_over(t_info *info)
 		temp->state = STATE_OVER;
 	}
 }
+
 void	run(t_info *info)
 {
 	int	state;
@@ -44,7 +46,7 @@ void	run(t_info *info)
 
 	while (1)
 	{
-		state =	get_philos_state(info);
+		state = get_philos_state(info);
 		if (state & STATE_DEAD)
 			set_philos_over(info);
 		if (state == STATE_OVER || state == STATE_DEAD)

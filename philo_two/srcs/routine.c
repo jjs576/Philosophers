@@ -6,7 +6,7 @@
 /*   By: jjoo <jjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 22:05:20 by jjoo              #+#    #+#             */
-/*   Updated: 2021/06/05 22:34:10 by jjoo             ###   ########.fr       */
+/*   Updated: 2021/06/07 13:22:23 by jjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	philo_think(t_philo *p)
 	p->state |= STATE_EAT;
 }
 
-void*		routine(void *arg)
+void		*routine(void *arg)
 {
 	t_philo	*p;
 
